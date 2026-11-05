@@ -92,26 +92,65 @@ void ModificarH(){
 }
 
 void EliminarH(){
+
     FILE *AB;
+    FILE *TEM;
+
     Huracan A;
+    char H_Eliminar[50];
+    int Encontrado = 0;
 
-    int HuracanE;
+    printf("Ingrese el nombre del huracan a eliminar.");
+    scanf("%c", &H_Eliminar);
 
-    if (AB = fopen(ARCHIVO,"r+b") == NULL){
-        printf("ERROR  no se pudo abiri el archivo.");
-        return;}
+    if((AB = fopen(ARCHIVO, "rb")) == NULL || TEM = fopen(ATEMPORAL, "wb") == NULL){
+        printf("ERROR al abrir los achivos.");
+        return ;}
 
-    printf("Ingresa el nombre del Huracan a eliminar:");
-    scanf("%[^\n]",&HuracanE);
+    while(fread(&A, sizeof(Huracan), 1, AB) == 1){
 
-    while (fread(&A, sizeof(Huracan), 1, AB) == 1){
-        if (strcmp(HuracanE, A.nombre) == 0){
-            
-            Huracan A[] = 0;
-        }
-        
-    }
-    
-    
+        if(strcmp(H_Eliminar, A.nombre) == 0){
+            enconterado = 1;
+            printf("Huaracan enconrtrado");}
+        else{
+            fwrite(&A, sizeof(Huracan), 1, TEM);}
 
+        fclose(AB);
+        fclose(TEM);
+    if(encontrado){
+        remove(ARCHIVO);
+        rename(ATEMPORAL,ARCHIVO);
+        printf("Huracan eliminado");}
+    else{
+        remove(ATEMPORAL);
+        printf("Huracan no encontrado");
+    }   
+return 0;
+}
+
+void Reportes(){
+  FILE *AB = fopen(ARCHIVO, "rb");
+  FILE *f = fopen(ARCHIVORH, "w");
+    char Finicio;
+    char Ffinal;
+    int nosexd;
+
+  if(AB === NULL){
+  printf("ERROR al abrir el archivo .bim.\n");
+  fclose(f);
+  return;}
+  
+  if(f == NULL){
+  printf("ERROR al abrir el archivo .txt. \n");
+  fclose(AB);
+      
+  fprintf(f, "Nombre\t Categoria\t Fecha\t Origen\t Velocidad\t ");
+  
+  while(fread(&A, sizeof(Huracan), 1, AB)==1){
+    fprintf(f,"%s\t %d\t %s\t %f\t, %s\t %f\n", A.nombre, A.categoria, A.fecha, A.tamaño, A.origen, A.velocidad_max);
+  }
+    fclose(AB);
+    fclose(f);
+    print("Archivo del reporte finalizado.");
+return 0;
 }
