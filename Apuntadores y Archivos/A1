@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void iniciarArreglo(int *A, int n, int rango);
+void iniciarArreglo2(int *A, int n, int rango);
+void imprimirArreglo(const int *A, int n, int c);
+
+int main(){
+
+    int n, rango, c;
+
+    printf("Ingrese el tamaño del arreglo:");
+    scanf("%d",&n);
+
+    printf("Ingrese el rango:");
+    scanf("%d",&rango);
+
+    int arreglo[n];
+
+    iniciarArreglo(arreglo, n, rango); // cambiar entre arreglo y arreglo2
+
+    printf("Desplegar arreglo.");
+    printf("Ingrese el numero de elementos por renglon:");
+    scanf("%d", &c);
+
+    imprimirArreglo(arreglo, n, c);
+
+    return 0;
+}
+
+void iniciarArreglo(int *A, int n, int rango){
+    srand(time(NULL));
+
+    for (int i = 0; i < n; i++){
+        
+        int num = rand() % rango + 0;
+
+        *(A+i)=num;
+    }
+    
+}
+
+void iniciarArreglo2(int *A, int n, int rango){
+    int valor;
+
+    for (int i = 0; i < n; i++){
+
+        printf("Ingrese el termino %d del arreglo", i);
+        scanf("%d", &valor);
+
+        *(A+i) = valor;
+    }
+    
+}
+
+void imprimirArreglo(const int *A, int n, int c){
+
+    for (int i = 0; i < n; i++){
+        printf("%d\t", *(A+i));
+
+        if ((i+1) == c){
+            printf("\n");
+        }
+    }
+}
